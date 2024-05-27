@@ -1,0 +1,18 @@
+version: '3.3'
+volumes:
+  data:
+services:
+  db:
+    image: mariadb
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'encurtadordb'
+      MYSQL_ROOT_PASSWORD: 'test'
+      MYSQL_ROOT_HOST: 'root'
+    ports:
+      - '3306:3306'
+    expose:
+      - '3306'
+    volumes:
+      - data:/var/lib/mysql
+      - ./scripts:/docker-entrypoint-initdb.d
