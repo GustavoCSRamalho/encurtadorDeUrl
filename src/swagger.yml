@@ -1,0 +1,170 @@
+openapi: 3.0.0
+info:
+  title: Encurtador de url
+  description: API com metodos para encurtar a url e recuperar.
+  version: 1.0.0
+servers:
+  - url: http://localhost:3333/
+    description: Funciona em maquina local.
+paths:
+  /shortUrl/{url}:
+    get:
+      summary: Encurta a url e retorna o objeto do banco de dados.
+      parameters:
+        - name: url
+          in: path
+          required: true
+          description: URL que sera inserida no banco de dados.
+          schema:
+            type : string
+            minimum: 1
+      description: Rota para inserar a url e retornar ela encurtada.
+      responses:
+        '200':    # status code
+          description: Url encurtada com seu devidos valores.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 4
+                  url:
+                    type: string
+                    example: http://google.com.br
+                  shortedUrl:
+                    type: string
+                    example: 123456
+                  date:
+                    type: date
+                    example: 2024-05-27
+        '404':
+          description: Aconteceu algum erro inesperado!
+  /shortUrl/url/{value}:
+      get:
+        summary: Recuperar url encurtada conforme encurtamento
+        parameters:
+          - name: value
+            in: path
+            required: true
+            description: URL encurtada
+            schema:
+              type : string
+              minimum: 1
+        description: Rota para recuperar url encurtada conforme encurtamento.
+        responses:
+          '200':    # status code
+            description: Url com seu devidos valores.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      format: int64
+                      example: 4
+                    url:
+                      type: string
+                      example: http://google.com.br
+                    shortedUrl:
+                      type: string
+                      example: 123456
+                    date:
+                      type: date
+                      example: 2024-05-27
+          '404':
+            description: Aconteceu algum erro inesperado!
+  /shortUrl/id/{value}:
+    get:
+      summary: Recuperar uma url de acordo com seu id.
+      parameters:
+        - name: value
+          in: path
+          required: true
+          description: Id da url no banco de dados.
+          schema:
+            type : string
+            minimum: 1
+      description: Rota para recuperar a url de acordo com seu id no banco de dados.
+      responses:
+        '200':    # status code
+          description: Url encurtada com seu devidos valores.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 4
+                  url:
+                    type: string
+                    example: http://google.com.br
+                  shortedUrl:
+                    type: string
+                    example: 123456
+                  date:
+                    type: date
+                    example: 2024-05-27
+        '404':
+          description: Aconteceu algum erro inesperado!
+  /shortUrl/all/{date}:
+    get:
+      summary: Recupera todas as url de acordo com a data especifica
+      parameters:
+        - name: date
+          in: path
+          required: true
+          example: "2024-05-27"
+          description: Data fornecida pelo usuario
+          schema:
+            type : string
+            minimum: 1
+      description: Rota para recuperar a url de acordo com seu id no banco de dados.
+      responses:
+        '200':
+          description: 'Request is successful.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/ListOfUrls'                    
+        '404':
+          description: Aconteceu algum erro inesperado!
+
+definitions:
+  ListOfUrls:
+    type: array
+    items:
+      $ref: '#/definitions/url'
+  url:
+      type: object
+      properties:
+        id:
+          type: integer
+        url:
+         type: string
+        shortedUrl:
+         type: string
+        date:
+         type: string
+
+  # urls:
+  #   type: object
+  #   properties:
+  #     id:
+  #       type: integer
+  #       format: int64
+  #       example: 4
+  #     url:
+  #       type: string
+  #       example: http://google.com.br
+  #     shortedUrl:
+  #       type: string
+  #       example: 123456
+  #     date:
+  #       type: date
+  #       example: "2024-05-27"

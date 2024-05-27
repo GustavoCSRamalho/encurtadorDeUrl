@@ -4,13 +4,15 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon index.js",
+    "start": "nodemon src/index.js",
     "generate:doc": "jsdoc -r src"
   },
   "dependencies": {
     "express": "^4.19.2",
     "mongodb": "^6.6.2",
-    "mysql2": "^3.9.8"
+    "mysql2": "^3.9.8",
+    "swagger-ui-express": "^5.0.0",
+    "yamljs": "^0.3.0"
   },
   "devDependencies": {
     "nodemon": "^3.1.1"
