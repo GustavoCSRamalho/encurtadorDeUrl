@@ -2,6 +2,8 @@
  * @module Controller
  */
 
+const { insertUrlShorted, selecById, selectAllUrlShortedFrom, selectByUrl, selectByUrlDefault } = require("../database/database");
+
 /**
  * método de encurtar uma URL persistindo-a no banco de dados.
  * @param {string} url - Url usado para ser inserida no banco de dados.
@@ -10,14 +12,20 @@
 
 async function persistirUrlNoBanco(req, res){
     var url = req.params.url
-    await insertUrlShorted(url).then( result => {
+    await insertUrlShorted(url).then( async result => {
         if (result.length != 0) {
-            return res.json(result[0])
+            await selectByUrlDefault(url).then( result => {
+                if (result.length != 0) {
+                    return res.json(result[0])
+                } else {
+                    return res.status(404).send("URL nao encontrada2!");
+                }
+            })
         } else {
-            return res.status(404).send("Aconteceu algum erro inesperado!");
+            return res.status(404).send("URL nao encontrada1!");
         }
     }).catch(error => {
-        return res.status(404).send("Aconteceu algum erro inesperado!");
+        return res.status(404).send(error);
     })  
 }
 

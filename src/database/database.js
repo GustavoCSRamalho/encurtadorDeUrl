@@ -3,20 +3,26 @@ async function connect(){
         return global.connection;
     }
     const mysql = require("mysql2/promise");
-    const connection = await mysql.createConnection({host: 'localhost',
+    const connection = await mysql.createConnection({host: 'db',
     port: 3306,
-    user: 'root',
-    password: 'test',
+    user: 'my-app-user',
+    password: 'my-app-password',
     database: 'encurtadordb'});
     console.log("Conectou ao mysql!");
     global.connection = connection;
     return connection
 }
 
+async function selectByUrlDefault(value){
+    const conn = await connect();
+    const [rows] = await conn.query("SELECT * FROM urlencurtadas where url = ?", [value]);
+    return rows;
+}
+
 async function selectAllUrlShortedFrom(date){
     // var code = generateCode()
     const conn = await connect();
-    const [rows] = await conn.query("SELECT * FROM urlencurtadas where date=?;", [date]);
+    const [rows] = await conn.query("SELECT * FROM urlencurtadas where created=?;", [date]);
     return rows;
 }
 
@@ -50,4 +56,4 @@ function generateCode() {
     return text;
   }
 
-module.exports = {selectAllUrlShortedFrom, selectByUrl, insertUrlShorted, selecById}
+module.exports = {selectAllUrlShortedFrom, selectByUrlDefault, selectByUrl, insertUrlShorted, selecById}
