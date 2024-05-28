@@ -4,7 +4,7 @@ info:
   description: API com metodos para encurtar a url e recuperar.
   version: 1.0.0
 servers:
-  - url: http://localhost:3333/
+  - url: https://encurtadornodejs-f4ff11fac82b.herokuapp.com/
     description: Funciona em maquina local.
 paths:
   /shortUrl/{url}:
