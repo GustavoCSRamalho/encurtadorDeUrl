@@ -14,7 +14,7 @@
 
 ## Rotas
 
-* http://localhost:3333/shortUrl/testando123 =>  encurtar uma URL persistindo-a no banco de dados.
-* http://localhost:3333/shortUrl/url/2hHny => retorna uma url encurtada conforme o encurtamento da URL.
-* http://localhost:3333/shortUrl/id/1 => retorna uma url encurtada conforme um id.
-* http://localhost:3333/shortUrl/all/2024-05-27 => retorna todas as URLs encurtadas em uma data específica.
+* http://localhost:3000/shortUrl/testando123 =>  encurtar uma URL persistindo-a no banco de dados.
+* http://localhost:3000/shortUrl/url/2hHny => retorna uma url encurtada conforme o encurtamento da URL.
+* http://localhost:3000/shortUrl/id/1 => retorna uma url encurtada conforme um id.
+* http://localhost:3000/shortUrl/all/2024-05-27 => retorna todas as URLs encurtadas em uma data específica.
