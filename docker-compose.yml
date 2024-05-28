@@ -8,14 +8,14 @@
 # database or a cache. For examples, see the Awesome Compose repository:
 # https://github.com/docker/awesome-compose
 services:
-  server:
-    image: gustavocsramalho/nodejs
-    container_name: server
-    restart: always
-    environment:
-      NODE_ENV: production
-    ports:
-      - 80:80
+  # project:
+  #   image: gustavocsramalho/nodejs
+  #   container_name: server
+  #   restart: always
+  #   environment:
+  #     NODE_ENV: production
+  #   ports:
+  #     - 80:80
   db:
     image: mysql/mysql-server:latest
     container_name: my-mysql
