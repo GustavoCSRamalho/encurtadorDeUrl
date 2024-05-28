@@ -1,13 +1,23 @@
+const { v1: uuidv1 } = require('uuid');
+
+// Função para gerar um número de 8 dígitos a partir de um UUID
+function generateNumericUUID() {
+    const uuid = uuidv1();
+    const numericUUID = parseInt(uuid.replace(/-/g, '').substring(0, 8), 16);
+    return numericUUID;
+}
 async function connect(){
+    console.log("Conectando ao mysql!");
+
     if(global.connect && global.connection.state !== "disconnected"){
         return global.connection;
     }
     const mysql = require("mysql2/promise");
-    const connection = await mysql.createConnection({host:'127.0.0.1',
-    port: 3306,
-    user: 'my-app-user',
-    password: 'my-app-password',
-    database: 'encurtadordb'});
+    const connection = await mysql.createConnection({host:'roundhouse.proxy.rlwy.net',
+    port: 52904,
+    user: 'root',
+    password: 'AcsqtxsTVXhKngkFFufVMuYILArmgvhe',
+    database: 'railway'});
     console.log("Conectou ao mysql!");
     global.connection = connection;
     return connection
@@ -41,10 +51,12 @@ async function selecById(value){
 }
 
 async function insertUrlShorted(url){
+    console.log('aqui')
     var code = generateCode()
     const conn = await connect();
-    const sql = "INSERT INTO urlencurtadas (url, shortedUrl) values(?,?);";
-    const values = [url, code];
+    const sql = "INSERT INTO urlencurtadas (id,url, shortedUrl, created) values(?,?,?,?);";
+    const values = [generateNumericUUID(), url, code, new Date()];
+    console.log('aqui2')
     return await conn.query(sql, values);
 }
 
@@ -55,5 +67,14 @@ function generateCode() {
       text += possible.charAt(Math.floor(Math.random() * possible.length));
     return text;
   }
+
+  function getCurrentDate() {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0'); // Adiciona um zero à esquerda se for menor que 10
+    const day = String(today.getDate()).padStart(2, '0'); // Adiciona um zero à esquerda se for menor que 10
+    const formattedDate = `${year}-${month}-${day}`;
+    return formattedDate;
+}
 
 module.exports = {selectAllUrlShortedFrom, selectByUrlDefault, selectByUrl, insertUrlShorted, selecById}

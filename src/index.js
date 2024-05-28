@@ -10,7 +10,7 @@ const server = express();
 server.use(express.json());
 server.use("/docs", swaggerUI.serve, swaggerUI.setup(spec));
 
-server.get("/shortUrl/:url",persistirUrlNoBanco);
+server.get("/shortUrl/:url", persistirUrlNoBanco);
 
 server.get("/shortUrl/url/:value",recuperarUrlEncurtadaConformeEncurtamento);
 

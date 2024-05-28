@@ -11,6 +11,7 @@ const { insertUrlShorted, selecById, selectAllUrlShortedFrom, selectByUrl, selec
  */
 
 async function persistirUrlNoBanco(req, res){
+    console.log("Conectando ao persistirUrlNoBanco!");
     var url = req.params.url
     await insertUrlShorted(url).then( async result => {
         if (result.length != 0) {
