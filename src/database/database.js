@@ -1,6 +1,5 @@
 const { v1: uuidv1 } = require('uuid');
 
-// Função para gerar um número de 8 dígitos a partir de um UUID
 function generateNumericUUID() {
     const uuid = uuidv1();
     const numericUUID = parseInt(uuid.replace(/-/g, '').substring(0, 8), 16);
@@ -30,21 +29,18 @@ async function selectByUrlDefault(value){
 }
 
 async function selectAllUrlShortedFrom(date){
-    // var code = generateCode()
     const conn = await connect();
     const [rows] = await conn.query("SELECT * FROM urlencurtadas where created=?;", [date]);
     return rows;
 }
 
 async function selectByUrl(value){
-    // var code = generateCode()
     const conn = await connect();
     const [rows] = await conn.query("SELECT * FROM urlencurtadas where shortedUrl = ?", [value]);
     return rows;
 }
 
 async function selecById(value){
-    // var code = generateCode()
     const conn = await connect();
     const [rows] = await conn.query("SELECT * FROM urlencurtadas where id = ?", [value]);
     return rows;
