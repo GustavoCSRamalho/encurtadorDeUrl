@@ -9,8 +9,9 @@
 # https://github.com/docker/awesome-compose
 services:
   server:
-    build:
-      context: .
+    image: gustavocsramalho/nodejs
+    container_name: server
+    restart: always
     environment:
       NODE_ENV: production
     ports:
@@ -26,7 +27,8 @@ services:
     ports:
       - '3306:3306'
     volumes:
-      - mysql-volume:/var/lib/mysql
+      - ~/mysql:/var/lib/mysql
+      - ./config/mysql.cnf:/etc/mysql/conf.d/my.cnf
       - ./scripts:/docker-entrypoint-initdb.d
 volumes:
   mysql-volume:
