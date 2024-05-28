@@ -2,9 +2,9 @@
 
 ## Como usar o projeto
 
-* 1 => baixe o projeto com https://github.com/GustavoCSRamalho/encurtadorDeUrl
-* 2 => Caso o banco de dados nao tenha sido criado, entrar no docker compose com o seguinte comando :
-* Na pasta do projeto, execute o comando npm start para iniciar o projeto!
+* 1 => Baixe o projeto com https://github.com/GustavoCSRamalho/encurtadorDeUrl
+* 2 => Entre na pasta de digite npm install
+* 3 => Execute o comando npm start para iniciar o projeto!
 
 
 ## Rotas
