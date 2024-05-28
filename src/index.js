@@ -3,7 +3,7 @@ const { persistirUrlNoBanco, recuperarUrlEncurtadaConformeEncurtamento, recupera
 const swaggerUI = require("swagger-ui-express");
 const YAML = require("yamljs");
 const spec = YAML.load("./src/swagger.yml");
-
+const PORT = process.env.PORT || 3000
 
 const server = express();
 
@@ -18,4 +18,4 @@ server.get("/shortUrl/id/:value", recuperarUrlEncurtadaConformeId);
 
 server.get("/shortUrl/all/:date", recuperarTodasUrlDeAcordoComAData);
 
-server.listen(80);
+server.listen(PORT);
