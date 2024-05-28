@@ -18,4 +18,4 @@ server.get("/shortUrl/id/:value", recuperarUrlEncurtadaConformeId);
 
 server.get("/shortUrl/all/:date", recuperarTodasUrlDeAcordoComAData);
 
-server.listen(80);
+server.listen(8081);
